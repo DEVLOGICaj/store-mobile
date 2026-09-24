@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>متجر الهواتف | Phone Store</title>
+    <meta name="description" content="متجر فاخر لبيع الهواتف المحمولة">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+    >
+
+    <script src="store.js"></script>
+
+    <style>
+        :root {
+            --bg: #070707;
+            --bg2: #101010;
+            --card: rgba(20,20,20,.82);
+            --card2: #151515;
+            --text: #ffffff;
+            --muted: #a5a5a5;
+            --line: rgba(255,255,255,.09);
+            --gold: #d6ad60;
+            --gold2: #f3d28a;
+            --green: #20c997;
+            --danger: #ff5c5c;
+            --shadow: 0 25px 80px rgba(0,0,0,.45);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Cairo", sans-serif;
+            background:
+                radial-gradient(circle at top right, rgba(214,173,96,.12), transparent 30%),
+                radial-gradient(circle at bottom left, rgba(214,173,96,.08), transparent 30%),
+                var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            transition: .3s;
+        }
+
+        body.light {
+            --bg: #f4f1eb;
+            --bg2: #ffffff;
+            --card: rgba(255,255,255,.9);
+            --card2: #ffffff;
+            --text: #171717;
+            --muted: #666;
+            --line: rgba(0,0,0,.08);
+            --shadow: 0 25px 70px rgba(0,0,0,.12);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button,
+        input {
+            font-family: inherit;
+        }
+
+        /* HEADER */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            background: rgba(7,7,7,.72);
+            border-bottom: 1px solid var(--line);
+        }
+
+        body.light header {
+            background: rgba(255,255,255,.78);
+        }
+
+        .nav {
+            width: min(1250px, 92%);
+            margin: auto;
+            min-height: 78px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: .5px;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            background:
+                linear-gradient(135deg, var(--gold2), var(--gold));
+            color: #111;
+            box-shadow: 0 10px 30px rgba(214,173,96,.22);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .theme-btn {
+            border: 1px solid var(--line);
+            background: var(--card);
+            color: var(--text);
+            width: 44px;
+            height: 44px;
+            border-radius: 13px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: .25s;
+        }
+
+        .theme-btn:hover {
+            transform: translateY(-2px);
+            border-color: var(--gold);
+        }
+
+        /* HERO */
+
+        .hero {
+            width: min(1250px, 92%);
+            margin: auto;
+            min-height: calc(100vh - 78px);
+            display: grid;
+            place-items: center;
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .hero-content {
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 18px;
+            border: 1px solid rgba(214,173,96,.28);
+            background: rgba(214,173,96,.07);
+            color: var(--gold2);
+            border-radius: 999px;
+            margin-bottom: 25px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .hero h1 {
+            font-size: clamp(45px, 8vw, 100px);
+            line-height: 1;
+            font-weight: 900;
+            margin-bottom: 25px;
+            background: linear-gradient(
+                135deg,
+                #fff,
+                var(--gold2),
+                #fff
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        body.light .hero h1 {
+            background: linear-gradient(
+                135deg,
+                #111,
+                #9b762c,
+                #111
+            );
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: auto;
+            color: var(--muted);
+            font-size: 18px;
+            line-height: 2;
+        }
+
+        .hero-buttons {
+            margin-top: 35px;
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .primary-btn {
+            border: 0;
+            background: linear-gradient(
+                135deg,
+                var(--gold2),
+                var(--gold)
+            );
+            color: #111;
+            padding: 15px 30px;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 15px 35px rgba(214,173,96,.2);
+            transition: .25s;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 45px rgba(214,173,96,.3);
+        }
+
+        .secondary-btn {
+            border: 1px solid var(--line);
+            background: var(--card);
+            color: var(--text);
+            padding: 15px 30px;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: .25s;
+        }
+
+        .secondary-btn:hover {
+            border-color: var(--gold);
+        }
+
+        /* STORE */
+
+        #store {
+            display: none;
+            width: min(1250px, 92%);
+            margin: auto;
+            padding: 55px 0 100px;
+        }
+
+        .store-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .store-title h2 {
+            font-size: clamp(30px, 5vw, 50px);
+            margin-bottom: 10px;
+            font-weight: 900;
+        }
+
+        .store-title p {
+            color: var(--muted);
+        }
+
+        /* FILTERS */
+
+        .filters {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            padding: 22px;
+            margin-bottom: 35px;
+            box-shadow: var(--shadow);
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr auto;
+            gap: 12px;
+        }
+
+        .filter-box {
+            position: relative;
+        }
+
+        .filter-box input {
+            width: 100%;
+            height: 52px;
+            border: 1px solid var(--line);
+            outline: none;
+            background: var(--bg2);
+            color: var(--text);
+            border-radius: 14px;
+            padding: 0 17px;
+            font-size: 14px;
+            transition: .25s;
+        }
+
+        .filter-box input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(214,173,96,.08);
+        }
+
+        .reset-btn {
+            height: 52px;
+            padding: 0 22px;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: transparent;
+            color: var(--text);
+            cursor: pointer;
+            font-weight: 800;
+            transition: .25s;
+        }
+
+        .reset-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold2);
+        }
+
+        /* PRODUCTS HEADER */
+
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            gap: 15px;
+        }
+
+        .products-header h3 {
+            font-size: 21px;
+        }
+
+        .products-count {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* GRID */
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        /* CARD */
+
+        .product-card {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: .3s;
+            animation: cardIn .5s ease both;
+        }
+
+        .product-card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(214,173,96,.38);
+        }
+
+        @keyframes cardIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .image-area {
+            height: 310px;
+            position: relative;
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(255,255,255,.07),
+                    transparent 60%
+                ),
+                #0d0d0d;
+            overflow: hidden;
+        }
+
+        body.light .image-area {
+            background: #f0eee9;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 18px;
+            transition: opacity .15s;
+        }
+
+        .image-number {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(0,0,0,.55);
+            color: #fff;
+            font-size: 12px;
+            backdrop-filter: blur(8px);
+        }
+
+        .image-controls {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 7px;
+            padding: 7px 10px;
+            border-radius: 999px;
+            background: rgba(0,0,0,.55);
+            backdrop-filter: blur(8px);
+        }
+
+        .image-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: rgba(255,255,255,.4);
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .image-dot.active {
+            background: var(--gold2);
+            transform: scale(1.25);
+        }
+
+        .product-info {
+            padding: 22px;
+        }
+
+        .product-name {
+            font-size: 22px;
+            font-weight: 900;
+            margin-bottom: 9px;
+        }
+
+        .product-description {
+            color: var(--muted);
+            line-height: 1.8;
+            min-height: 58px;
+            font-size: 14px;
+            margin-bottom: 14px;
+        }
+
+        .product-meta {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 18px;
+        }
+
+        .location-icon {
+            color: var(--gold2);
+        }
+
+        .price-row {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .price-label {
+            color: var(--muted);
+            font-size: 12px;
+            margin-bottom: 3px;
+        }
+
+        .price {
+            color: var(--gold2);
+            font-size: 25px;
+            font-weight: 900;
+        }
+
+        .currency {
+            font-size: 12px;
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        .whatsapp-btn {
+            width: 100%;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border-radius: 14px;
+            background: var(--green);
+            color: #fff;
+            font-weight: 900;
+            transition: .25s;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.08);
+        }
+
+        /* EMPTY */
+
+        .empty-state {
+            display: none;
+            text-align: center;
+            padding: 80px 20px;
+            color: var(--muted);
+        }
+
+        .empty-icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 35px 20px;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        footer strong {
+            color: var(--gold2);
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 1000px) {
+            .products-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .filters {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .reset-btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .nav {
+                min-height: 68px;
+            }
+
+            .logo {
+                font-size: 17px;
+            }
+
+            .logo-icon {
+                width: 39px;
+                height: 39px;
+            }
+
+            .hero {
+                min-height: calc(100vh - 68px);
+                padding: 55px 0;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filters {
+                grid-template-columns: 1fr;
+            }
+
+            .image-area {
+                height: 290px;
+            }
+
+            .products-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <nav class="nav">
+
+        <div class="logo">
+            <div class="logo-icon">📱</div>
+            <span>PHONE STORE</span>
+        </div>
+
+        <div class="nav-actions">
+            <button
+                class="theme-btn"
+                id="themeBtn"
+                onclick="toggleTheme()"
+            >☀️</button>
+        </div>
+
+    </nav>
+</header>
+
+<main>
+
+    <!-- WELCOME -->
+
+    <section class="hero" id="welcome">
+
+        <div class="hero-content">
+
+            <div class="hero-badge">
+                ✦ متجر الهواتف الفاخر
+            </div>
+
+            <h1>PHONE STORE</h1>
+
+            <p>
+                اكتشف مجموعة مميزة من الهواتف المحمولة،
+                واختر هاتفك المناسب بسهولة مع تفاصيل واضحة
+                وأسعار محدثة وتواصل مباشر مع البائع.
+            </p>
+
+            <div class="hero-buttons">
+
+                <button
+                    class="primary-btn"
+                    onclick="showStore()"
+                >
+                    تصفح الهواتف
+                </button>
+
+                <button
+                    class="secondary-btn"
+                    onclick="scrollToStore()"
+                >
+                    اكتشف المزيد
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- STORE -->
+
+    <section id="store">
+
+        <div class="store-title">
+
+            <h2>الهواتف المتوفرة</h2>
+
+            <p>
+                اختر الهاتف المناسب لك وتواصل مباشرة مع البائع
+            </p>
+
+        </div>
+
+
+        <!-- FILTERS -->
+
+        <div class="filters">
+
+            <div class="filter-box">
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="ابحث عن اسم الهاتف..."
+                    oninput="filterProducts()"
+                >
+            </div>
+
+            <div class="filter-box">
+                <input
+                    type="number"
+                    id="minPrice"
+                    placeholder="أقل سعر"
+                    oninput="filterProducts()"
+                >
+            </div>
+
+            <div class="filter-box">
+                <input
+                    type="number"
+                    id="maxPrice"
+                    placeholder="أعلى سعر"
+                    oninput="filterProducts()"
+                >
+            </div>
+
+            <button
+                class="reset-btn"
+                onclick="resetFilters()"
+            >
+                إعادة ضبط
+            </button>
+
+        </div>
+
+
+        <div class="products-header">
+
+            <h3>المنتجات</h3>
+
+            <div class="products-count">
+                عدد الهواتف:
+                <strong id="productsCount">0</strong>
+            </div>
+
+        </div>
+
+
+        <div
+            class="products-grid"
+            id="productsGrid"
+        ></div>
+
+
+        <div
+            class="empty-state"
+            id="emptyState"
+        >
+            <div class="empty-icon">📱</div>
+
+            <h3>لا توجد هواتف مطابقة</h3>
+
+            <p>
+                جرّب تغيير البحث أو نطاق السعر.
+            </p>
+        </div>
+
+    </section>
+
+</main>
+<!-- FOOTER -->
+
+<footer>
+    <div>
+        © 2026
+        <strong>PHONE STORE</strong>
+        — جميع الحقوق محفوظة
+    </div>
+</footer>
+
+
+<script>
+
+    const whatsappNumber = "963946887715";
+
+    let currentProducts = [];
+
+    let activeImages = {};
+
+
+    // فتح المتجر
+
+    function showStore() {
+
+        document.getElementById("welcome").style.display = "none";
+
+        document.getElementById("store").style.display = "block";
+
+        loadProducts();
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    // الانتقال للمتجر
+
+    function scrollToStore() {
+
+        showStore();
+
+    }
+
+
+    // تحميل المنتجات
+
+    function loadProducts() {
+
+        if (typeof products === "undefined") {
+
+            showError();
+
+            return;
+
+        }
+
+        currentProducts = products;
+
+        displayProducts(currentProducts);
+
+    }
+
+
+    // عرض المنتجات
+
+    function displayProducts(list) {
+
+        const grid =
+            document.getElementById("productsGrid");
+
+        const empty =
+            document.getElementById("emptyState");
+
+        const count =
+            document.getElementById("productsCount");
+
+
+        grid.innerHTML = "";
+
+        count.textContent = list.length;
+
+
+        if (list.length === 0) {
+
+            empty.style.display = "block";
+
+            return;
+
+        }
+
+
+        empty.style.display = "none";
+
+
+        list.forEach(function(product, index) {
+
+            const image1 =
+                product.image || "";
+
+            const image2 =
+                product.image2 ||
+                product.image ||
+                "";
+
+
+            activeImages[product.id] = 1;
+
+
+            const price =
+                Number(product.price || 0);
+
+
+            const message =
+                encodeURIComponent(
+                    "مرحباً، أريد الاستفسار عن هاتف " +
+                    product.name
+                );
+
+
+            const whatsappLink =
+                "https://wa.me/" +
+                whatsappNumber +
+                "?text=" +
+                message;
+
+
+            const card =
+                document.createElement("div");
+
+
+            card.className =
+                "product-card";
+
+
+            card.style.animationDelay =
+                (index * 0.05) + "s";
+
+
+            card.innerHTML = `
+
+                <div class="image-area">
+
+                    <img
+                        class="product-image"
+                        id="img-${product.id}"
+                        src="${image1}"
+                        alt="${escapeHTML(product.name)}"
+                        onerror="this.src=''; this.style.opacity='0';"
+                    >
+
+                    <div
+                        class="image-number"
+                        id="number-${product.id}"
+                    >
+                        1 / 2
+                    </div>
+
+
+                    <div class="image-controls">
+
+                        <span
+                            class="image-dot active"
+                            id="dot1-${product.id}"
+                            onclick="changeImage('${product.id}', 1)"
+                        ></span>
+
+                        <span
+                            class="image-dot"
+                            id="dot2-${product.id}"
+                            onclick="changeImage('${product.id}', 2)"
+                        ></span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <div class="product-name">
+                        ${escapeHTML(product.name)}
+                    </div>
+
+
+                    <div class="product-description">
+                        ${escapeHTML(
+                            product.description ||
+                            "لا يوجد وصف"
+                        )}
+                    </div>
+
+
+                    <div class="product-meta">
+
+                        <span class="location-icon">
+                            📍
+                        </span>
+
+                        <span>
+                            ${escapeHTML(
+                                product.location ||
+                                "غير محدد"
+                            )}
+                        </span>
+
+                    </div>
+
+
+                    <div class="price-row">
+
+                        <div>
+
+                            <div class="price-label">
+                                السعر
+                            </div>
+
+                            <div class="price">
+
+                                ${formatPrice(price)}
+
+                                <span class="currency">
+                                    ل.س
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        class="whatsapp-btn"
+                        href="${whatsappLink}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+
+                        <span>💬</span>
+
+                        تواصل معي عبر واتساب
+
+                    </a>
+
+                </div>
+
+            `;
+
+
+            grid.appendChild(card);
+
+        });
+
+    }
+
+
+    // تبديل صورة الهاتف
+
+    function changeImage(id, number) {
+
+        const product =
+            products.find(
+                p => String(p.id) === String(id)
+            );
+
+
+        if (!product) return;
+
+
+        const img =
+            document.getElementById(
+                "img-" + id
+            );
+
+
+        const dot1 =
+            document.getElementById(
+                "dot1-" + id
+            );
+
+
+        const dot2 =
+            document.getElementById(
+                "dot2-" + id
+            );
+
+
+        const numberText =
+            document.getElementById(
+                "number-" + id
+            );
+
+
+        const image =
+            number === 1
+                ? product.image
+                : (
+                    product.image2 ||
+                    product.image
+                );
+
+
+        img.style.opacity = "0";
+
+
+        setTimeout(function() {
+
+            img.src = image || "";
+
+            img.style.opacity = "1";
+
+        }, 120);
+
+
+        if (number === 1) {
+
+            dot1.classList.add("active");
+
+            dot2.classList.remove("active");
+
+            numberText.textContent = "1 / 2";
+
+        }
+
+        else {
+
+            dot2.classList.add("active");
+
+            dot1.classList.remove("active");
+
+            numberText.textContent = "2 / 2";
+
+        }
+
+    }
+
+
+    // البحث والفلترة
+
+    function filterProducts() {
+
+        const search =
+            document
+                .getElementById("searchInput")
+                .value
+                .trim()
+                .toLowerCase();
+
+
+        const minValue =
+            document
+                .getElementById("minPrice")
+                .value;
+
+
+        const maxValue =
+            document
+                .getElementById("maxPrice")
+                .value;
+
+
+        const min =
+            minValue === ""
+                ? 0
+                : Number(minValue);
+
+
+        const max =
+            maxValue === ""
+                ? Infinity
+                : Number(maxValue);
+
+
+        const filtered =
+            products.filter(function(product) {
+
+                const name =
+                    String(
+                        product.name || ""
+                    ).toLowerCase();
+
+
+                const price =
+                    Number(
+                        product.price || 0
+                    );
+
+
+                const matchesName =
+                    name.includes(search);
+
+
+                const matchesPrice =
+                    price >= min &&
+                    price <= max;
+
+
+                return (
+                    matchesName &&
+                    matchesPrice
+                );
+
+            });
+
+
+        currentProducts =
+            filtered;
+
+
+        displayProducts(
+            filtered
+        );
+
+    }
+
+
+    // إعادة ضبط الفلاتر
+
+    function resetFilters() {
+
+        document
+            .getElementById("searchInput")
+            .value = "";
+
+
+        document
+            .getElementById("minPrice")
+            .value = "";
+
+
+        document
+            .getElementById("maxPrice")
+            .value = "";
+
+
+        currentProducts =
+            products;
+
+
+        displayProducts(
+            products
+        );
+
+    }
+
+
+    // تنسيق السعر
+
+    function formatPrice(price) {
+
+        return new Intl.NumberFormat(
+            "ar-SY"
+        ).format(price);
+
+    }
+
+
+    // حماية النصوص من HTML
+
+    function escapeHTML(value) {
+
+        return String(value)
+
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+
+            .replace(
+                /</g,
+                "&lt;"
+            )
+
+            .replace(
+                />/g,
+                "&gt;"
+            )
+
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+    }
+
+
+    // الوضع الليلي / النهاري
+
+    function toggleTheme() {
+
+        document.body.classList.toggle(
+            "light"
+        );
+
+
+        const light =
+            document.body.classList.contains(
+                "light"
+            );
+
+
+        document.getElementById(
+            "themeBtn"
+        ).textContent =
+            light ? "🌙" : "☀️";
+
+
+        localStorage.setItem(
+            "phoneStoreTheme",
+            light ? "light" : "dark"
+        );
+
+    }
+
+
+    // تحميل الثيم المحفوظ
+
+    function loadTheme() {
+
+        const saved =
+            localStorage.getItem(
+                "phoneStoreTheme"
+            );
+
+
+        if (saved === "light") {
+
+            document.body.classList.add(
+                "light"
+            );
+
+
+            document.getElementById(
+                "themeBtn"
+            ).textContent = "🌙";
+
+        }
+
+    }
+
+
+    // في حال تعذر تحميل store.js
+
+    function showError() {
+
+        const grid =
+            document.getElementById(
+                "productsGrid"
+            );
+
+
+        grid.innerHTML = `
+
+            <div style="
+                grid-column:1/-1;
+                text-align:center;
+                padding:80px 20px;
+                color:#aaa;
+            ">
+
+                <div style="
+                    font-size:55px;
+                    margin-bottom:20px;
+                ">
+                    ⚠️
+                </div>
+
+
+                <h2 style="
+                    color:var(--text);
+                    margin-bottom:10px;
+                ">
+                    تعذر تحميل المنتجات
+                </h2>
+
+
+                <p>
+                    تأكد أن ملف
+                    <strong>store.js</strong>
+                    موجود بجانب
+                    <strong>index.html</strong>.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
+    // تشغيل الثيم عند فتح الموقع
+
+    loadTheme();
+
+
+</script>
+
+</body>
+</html>
