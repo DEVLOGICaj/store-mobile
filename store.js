@@ -5,7 +5,7 @@
         description: "rsdxsax",
         location: "scs",
         image: "pro.jpg",
-        image2: "lap.jpg"
+        image2: "lap.jpg",
         price: "1555"
     },
 ];
